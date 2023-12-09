@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Prodcut List</title>
+  <style>
+    /* Basic table styling */
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">
+            <img src="images/logo.png" width="100px">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="addproduct.html">Add Product</a></li>
+                <li><a href="index.html">Home</a></li>
+        </nav>
+    </div>
+
+  <!-- Table structure -->
+  <table>
+    <thead>
+      <tr>
+        <th>S.No</th>
+        <th>Product Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Phone number</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<!-- Include Toastr library from a CDN -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $.ajax({
+        url: "http://localhost:8000/api/ListProduct",
+        method : "post",
+        data: {
+            category_id:0
+        },
+        success: function( result ) {
+            console.log(result,"result")
+            result?.result?.map((res,i)=>{
+                var newRow = $('<tr><td>' + (i+1) + '</td><td>' + res?.title + '</td>' + '</td><td>' + res?.description + '</td>'+ '</td><td>' + res?.price + '</td>' + '</td><td>' + res?.phone_number + '</td></tr>');
+                $('tbody').append(newRow);
+            })
+
+        }
+        });
+    });
+</script>
+</html>

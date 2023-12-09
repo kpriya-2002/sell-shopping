@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="addproduct.css">
+    <title>Add product</title>
+</head>
+<body>
+    <h2>Add Product</h2>
+    <div class="Main">
+        <div class="Login">
+            <form class="form" >
+                <div class="title">
+                 <span>Title *</span><br>
+                 <input type="text" name="title" required id="title">
+                </div>
+                <div class="Describtion">
+                  <span>Describtion *</span><br>
+                  <input type="text" name="description" required id="description">
+                </div>
+                <div class="Price">
+                    <span>Price *</span><br>
+                    <input type="number" name="price" required id="price">
+                </div>
+                  <div class="Product"><br>
+                    <span>Product Category *</span><br>
+                    <select name="category" required id="category">
+                    </select>
+                  </div>
+                  <div class="Phone-Number">
+                    <span >Phone Number *</span><br>
+                    <input type="number" placeholder="Enter phone number" name="phonenumber"  required id="phonenumber">
+                  </div>
+                  <div class="Phone-Number">
+                    <span >Select image *</span><br>
+                    <input type="file"  name="image"  required id="image">
+                  </div>
+                  <input type="hidden" id="base64Result"></input>
+                  <div><br>
+                    <button type="button" onclick="addProduct()"> <a href="">Add Product</a></button>
+                  </div>
+            </form>
+            
+        </div>
+    </div>
+    <!-- <div class="Photo">
+        <span >Upload image</span><br>
+        <input type="image">
+    </div> -->
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<!-- Include Toastr library from a CDN -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $.ajax({
+        url: "http://localhost:8000/api/listAllCategory",
+        method : "post",
+        data: {},
+        success: function( result ) {
+            console.log(result,"result")
+            result?.result?.map((res,i)=>{
+                var newOption = $('<option></option>').attr('value', res?.id).text(res?.category_name);
+
+                $('select[name="category"]').append(newOption);
+            })
+
+        }
+        });
+
+
+      // Event listener for file input change
+      $('#image').on('change', function(e) {
+        var file = e.target.files[0];
+
+        if (file) {
+          convertToBase64(file);
+        }
+      });
+
+      function convertToBase64(file) {
+        var reader = new FileReader();
+
+        reader.onload = function(e) {
+          // Display the Base64 representation of the file
+          var base64Result = e.target.result;
+          let val = base64Result.replace("data:image/png;base64,", "")
+          $('#base64Result').val(val);
+          console.log(val)
+        };
+
+        // Read the file as a data URL, which will be in Base64 format
+        reader.readAsDataURL(file);
+      }
+    });
+    function addProduct(){
+        let title = $("#title").val();
+        let description = $("#description").val();
+        let price = $("#price").val();
+        let category = $("#category").val();
+        let phonenumber = $("#phonenumber").val();
+        let image = $("#base64Result").val();
+        console.log(image)
+        $.ajax({
+        url: "http://localhost:8000/api/addProduct",
+        method : "post",
+        data: {
+            title: title,
+            description: description,
+            price: price,
+            category_id: category,
+            phone_number: phonenumber,
+            image: image
+        },
+        success: function( result ) {
+            console.log(result,"result")
+
+        }
+        });
+    }
+</script>
+</html>

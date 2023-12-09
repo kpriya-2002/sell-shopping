@@ -1,0 +1,73 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+.Main{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    padding-right: 400px;
+    /* background-color: red; */
+}
+h2{
+    margin-top:10px ;
+    margin-bottom:15px ;
+    text-align: center;
+    padding-right: 450px;
+}
+form .title input{
+     border-radius: 3px;
+     border-color: silver;
+     height: 40px;
+     width: 300px;
+     margin-top:5px ;
+     margin-bottom:15px ;
+}
+form .Describtion input{
+    margin-top:5px ;
+     margin-bottom:15px ;
+     width: 300px;
+     height: 100px;
+     border-radius: 3px;
+     border-color: silver;
+}
+form .Price input{
+    margin-top:5px ;
+    margin-bottom:5px;
+    width: 300px;
+    height: 40px;
+    border-radius: 3px;
+    border-color: silver;
+}
+form .Product input{
+    margin-top:5px ;
+    margin-bottom:5px;
+    width: 300px;
+    height: 40px;
+    border-radius: 3px;
+    border-color: silver;
+    text-align: center;
+}
+form .Phone-Number input{
+    margin-top:5px ;
+    margin-bottom:5px;
+    width: 300px;
+    height: 40px;
+    border-radius: 3px;
+    border-color: silver;
+}
+button{
+    margin-top:5px ;
+    margin-bottom:5px;
+    width: 300px;
+    height: 40px;
+    border-radius: 3px;
+    border-color: silver;
+    background-color: orange;
+    color: white;
+    border: none;
+}
+.Photo span{
+    position: relative;
+    background-color: red;
+}

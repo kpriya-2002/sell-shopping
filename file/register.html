@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="register.css">
+    
+</head>
+<body>
+  
+    <div class="container">
+        <div class="navbar">
+        <div class="logo">
+                <img src="images/logo.png" width="100px">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                
+                <li><a href="register.html">Register</a></li>
+                <li><a href="loginpage.html">Login</a></li>
+        </nav>
+    </div>
+        <div class="cname">
+            <img src="images/elect.png">
+        </div>
+        <div class="logincontainer">
+              <h2>Register</h2>
+              <form >
+                <table>
+                    <tr><td>Username</td></tr>
+                    <tr><td><input type="text" name="username" id="username" class="login-tab"></td></tr>
+                    <tr><td>Email</td></tr>
+                    <tr><td><input type="text"name="email" id="email" class="login-tab"></td></tr>
+                    <tr><td>Password</td></tr>
+                    <tr><td><input type="password" name="password" id="password" class="login-tab"></td></tr>
+                    <tr><td><button type="button" class="login-button" onclick="register()">Register</button></td></tr>
+                </table>
+              
+              </form>
+        </div>
+    </div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<!-- Include Toastr library from a CDN -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+<script>
+    function register(){
+        let username = $("#username").val();
+        let email   = $("#email").val();
+        let password = $("#password").val();
+        $.ajax({
+        url: "http://localhost:8000/api/register",
+        method : "post",
+        data: {
+            user_name:  username,
+            email: email,
+            password : password
+        },
+        success: function( result ) {
+            console.log(result,"result")
+            if(result?.message == "user register Successfully"){
+                toastr.success('Success, User Register Successfully');
+                setTimeout(()=>{
+                    window.location.href = "loginpage.html";
+                },2000)
+            }else{
+                toastr.error(result?.message);
+            }
+        }
+        });
+        console.log("hii",username,password)
+    }
+</script>
+</html>
