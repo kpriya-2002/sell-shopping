@@ -25,7 +25,7 @@ This repository contains the source code for a buy-sell shop website. The websit
 Create an account or log in to start buying or selling products.
 
 ## Contribtuion :
-This project is handled by Shanmugapriya and Vignesh , we both gave oru best contribution to the project.
+This project is handled by Shanmugapriya
 
 ## License
 This project is licensed Free
